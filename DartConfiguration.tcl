@@ -4,8 +4,8 @@
 
 
 # Configuration directories and files
-SourceDirectory: /Users/waylens/Documents/underbayan/general
-BuildDirectory: /Users/waylens/Documents/underbayan/general
+SourceDirectory: /Users/waylens/Documents/underbayan/project/general
+BuildDirectory: /Users/waylens/Documents/underbayan/project/general
 
 # Where to place the cost data store
 CostDataFile: 
@@ -33,7 +33,7 @@ ScpCommand: /usr/bin/scp
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "/usr/local/Cellar/cmake/3.4.1/bin/cmake" "/Users/waylens/Documents/underbayan/general"
+ConfigureCommand: "/usr/local/Cellar/cmake/3.9.4_1/bin/cmake" "/Users/waylens/Documents/underbayan/project/general"
 MakeCommand: /usr/local/Cellar/cmake/3.4.1/bin/cmake --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 
@@ -52,6 +52,7 @@ SVNUpdateOptions:
 
 # Git options
 GITCommand: /usr/bin/git
+GITInitSubmodules: 
 GITUpdateOptions: 
 GITUpdateCustom: 
 
@@ -63,9 +64,9 @@ P4UpdateOptions:
 P4UpdateCustom: 
 
 # Generic update command
-UpdateCommand: 
+UpdateCommand: /usr/bin/git
 UpdateOptions: 
-UpdateType: 
+UpdateType: git
 
 # Compiler info
 Compiler: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++

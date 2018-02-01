@@ -1,4 +1,6 @@
+## 要求的最低cmake 版本
 cmake_minimum_required(VERSION 3.4)
+## 工程名称
 project(general)
 include(CTest)
 set (GENERAL_VERSION_MAJOR 1)
@@ -13,7 +15,6 @@ configure_file (
         "${INCLUDE_TEMPLATE}/version.h.in"
         "${INCLUDE_TEMPLATE}/version.h"
 )
-
 option (USE_MYMATH  "Use tutorial provided math implementation" ON)
 if (USE_MYMATH)
     include_directories ("${LIB_DIR}/MathFunctions")
@@ -21,11 +22,13 @@ if (USE_MYMATH)
     set (EXTRA_LIBS ${EXTRA_LIBS} MathFunctions)
 endif (USE_MYMATH)
 
-
-
 set(SOURCE_FILES  src/basic.cpp  src/include_template/version.h.in )
 add_executable("my_sqrt" src/mysqrt.cpp)
-add_executable("flapjack" src/flapjack.cpp)
+add_executable("flapjack" src/flapjack.cpp )
+add_executable("test__"  src/test.cpp )
+add_executable("AKS"  src/AKS.cpp )
+add_executable("Concurrent"  src/Concurrent.cpp )
+add_executable("Lock"  src/Lock.cpp )
 
 target_link_libraries (my_sqrt  ${EXTRA_LIBS})
 install (TARGETS my_sqrt DESTINATION bin)
@@ -34,7 +37,8 @@ macro (do_test arg result)
     add_test (my_sqrt_comp_${arg} my_sqrt ${arg})
     set_tests_properties (my_sqrt_comp_${arg} PROPERTIES PASS_REGULAR_EXPRESSION ${result})
 endmacro (do_test)
-do_test (4 "4 is 2")
-do_test (9 "9 is 3")
-do_test (-25 "-25 is 0")
-do_test (0.0001 "0.0001 is 0.01")
+
+# TODO: how to enable the cout function in cmake test
+#add_test (Concurrent-test Concurrent)
+
+add_test (lock-test Lock)
